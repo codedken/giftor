@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "242818659622",
+    "project_id": "gifter-76777",
+    "storage_bucket": "gifter-76777.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242818659622:android:d28b56c74aa9bae2b43de7",
+        "android_client_info": {
+          "package_name": "com.chekslate.gifter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "242818659622-7hi09g71hj79foo4is6if1dhk53bmrk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAglrnTmlOqVfXNG_wS3d-NDGUXpJF5WhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "242818659622-7hi09g71hj79foo4is6if1dhk53bmrk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242818659622:android:2e7e50fc4c0232c3b43de7",
+        "android_client_info": {
+          "package_name": "com.chekslate.giftor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "242818659622-7hi09g71hj79foo4is6if1dhk53bmrk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAglrnTmlOqVfXNG_wS3d-NDGUXpJF5WhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "242818659622-7hi09g71hj79foo4is6if1dhk53bmrk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
