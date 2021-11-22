@@ -33,16 +33,24 @@ class _JoinGroupFormState extends State<JoinGroupForm> {
       });
       return;
     }
-      print('e folo');
-      setState(() {
-        isTextEmpty = true;
-        errorText = '';
-      });
+    setState(() {
+      isTextEmpty = true;
+      errorText = '';
+    });
+    try {
       await joinGroupProvider.addMember(
         authProvider.getCurrentUserId,
         _groupCode,
       );
-      Navigator.of(context).pop();
+    } catch (e) {
+      setState(() {
+        isTextEmpty = false;
+        errorText = 'You are a member of this group';
+      });
+      return;
+    }
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -83,22 +91,22 @@ class _JoinGroupFormState extends State<JoinGroupForm> {
                 if (value!.isEmpty) {
                   setState(() {
                     isTextEmpty = true;
-                  errorText = '';
+                    errorText = '';
                   });
-                    return 'Please enter group code';
-                  }
+                  return 'Please enter group code';
+                }
                 return null;
               },
               onSaved: (value) {
                 _groupCode = value!.trim();
               }),
-          if(isTextEmpty == false)
+          if (isTextEmpty == false)
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
-              errorText,
-              style: TextStyle(color: Colors.red[700], fontSize: 12.0),
-          ),
+                errorText,
+                style: TextStyle(color: Colors.red[700], fontSize: 12.0),
+              ),
             ),
           const SizedBox(height: 8.0),
           Row(
@@ -141,7 +149,7 @@ class _JoinGroupFormState extends State<JoinGroupForm> {
                         vertical: 12.0,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context).pop(),
                     child: Text(
                       'Cancel',
                       style: TextStyle(

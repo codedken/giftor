@@ -142,7 +142,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  String? get getCurrentUserId{
+  String? get getCurrentUserId {
     if (_auth.currentUser != null) {
       return _auth.currentUser!.uid;
     }

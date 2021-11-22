@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../widgets/home_button.dart';
-import '../widgets/participant_card.dart';
-import '../widgets/rounded_circle_group.dart';
+import '../widgets/widgets.dart';
+
+import '../models/my_shared_preferences.dart';
+
+import '../screens/screens.dart';
 
 import '../constants_and_methods.dart';
 
@@ -11,6 +13,8 @@ class ParticipantsScreen extends StatelessWidget {
   static const String routeName = '/participants_screen';
   @override
   Widget build(BuildContext context) {
+    final _userData = MySharedPreferences.userData;
+    final person = MySharedPreferences.getUser(_userData);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff0A0616),
@@ -47,82 +51,69 @@ class ParticipantsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 26,
-                            backgroundImage:
-                                AssetImage('assets/images/bigmanphoto.png'),
-                          ),
-                        ),
-                        Text(
-                          kAppName,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontFamily: 'Lobster',
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.more_vert,
-                            color: Colors.white,
-                            size: 36.0,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+                    Header(ctx: context, person: person),
                     SizedBox(height: 32.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        HomeButton(
-                          btnColor: Color(0xff1323B4).withOpacity(0.9),
-                          btnText: 'Join group',
-                          onTap: () {},
-                          btnIcon: FaIcon(
-                            FontAwesomeIcons.users,
-                            color: Colors.white,
-                            size: 20.0,
-                          ),
+                    Hero(
+                      tag: 'home-buttons',
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            HomeButton(
+                              btnColor: Color(0xff1323B4).withOpacity(0.9),
+                              btnText: 'Pick giftee',
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  PickRecipientScreen.routeName,
+                                );
+                              },
+                              btnIcon: FaIcon(
+                                FontAwesomeIcons.userPlus,
+                                color: Colors.white,
+                                size: 20.0,
+                              ),
+                            ),
+                            SizedBox(width: 8.0),
+                            HomeButton(
+                              btnColor: Color(0xffBE123C),
+                              btnText: 'delete group',
+                              onTap: () {},
+                              btnIcon: FaIcon(
+                                FontAwesomeIcons.times,
+                                color: Colors.white,
+                                size: 20.0,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(width: 8.0),
-                        HomeButton(
-                          btnColor: Color(0xffBE123C),
-                          btnText: 'delete group',
-                          onTap: () {},
-                          btnIcon: FaIcon(
-                            FontAwesomeIcons.times,
-                            color: Colors.white,
-                            size: 20.0,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     SizedBox(height: 15.0),
-                    TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Color(0xff000000).withOpacity(0.3),
-                          size: 28.0,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: 'Search participant',
-                        hintStyle: kAuthInputHintStyle.copyWith(
-                          fontSize: 16.0,
-                        ),
-                        contentPadding: kAuthInputPadding,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                          borderSide: BorderSide.none,
+                    Hero(
+                      tag: 'search-input',
+                      child: Material(
+                        color: Colors.transparent,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Color(0xff000000).withOpacity(0.3),
+                              size: 28.0,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'Search participant',
+                            hintStyle: kAuthInputHintStyle.copyWith(
+                              fontSize: 16.0,
+                            ),
+                            contentPadding: kAuthInputPadding,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
                         ),
                       ),
                     ),

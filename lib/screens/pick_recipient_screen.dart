@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:giftor/widgets/widgets.dart';
+import '../models/my_shared_preferences.dart';
 
 import '../widgets/rounded_circle_group.dart';
 import '../widgets/fewer_stacked_circle.dart';
 import '../widgets/selected_card.dart';
 
-import '../constants_and_methods.dart';
-
 class PickRecipientScreen extends StatelessWidget {
   static const String routeName = '/pick_recipient_screen';
   @override
   Widget build(BuildContext context) {
+    final _userData = MySharedPreferences.userData;
+    final person = MySharedPreferences.getUser(_userData);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff0A0616),
@@ -45,37 +47,7 @@ class PickRecipientScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 26,
-                            backgroundImage:
-                                AssetImage('assets/images/bigmanphoto.png'),
-                          ),
-                        ),
-                        Text(
-                          kAppName,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontFamily: 'Lobster',
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.more_vert,
-                            color: Colors.white,
-                            size: 36.0,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+                    Header(ctx: context, person: person),
                     SizedBox(height: 24.0),
                     Text(
                       'Kings Model Youths',

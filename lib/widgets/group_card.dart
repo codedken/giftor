@@ -1,3 +1,5 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
+
 import '../my_packages/my_packages.dart';
 
 class GroupCard extends StatefulWidget {
@@ -18,11 +20,11 @@ class GroupCard extends StatefulWidget {
 }
 
 class _GroupCardState extends State<GroupCard> {
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
+    return BouncingWidget(
+      onPressed: widget.onTap,
+      scaleFactor: 1.0,
       child: Card(
         color: Colors.white,
         elevation: 12.0,
@@ -45,7 +47,7 @@ class _GroupCardState extends State<GroupCard> {
                       widget.groupName,
                       style: TextStyle(
                         color: Color(0xff000000).withOpacity(0.75),
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -53,8 +55,8 @@ class _GroupCardState extends State<GroupCard> {
                     Text(
                       'Creator: ${widget.createdByText}',
                       style: TextStyle(
-                        color: Color(0xff000000).withOpacity(0.58),
-                        fontSize: 16.0,
+                        color: Color(0xFF000000).withOpacity(0.58),
+                        fontSize: 14.0,
                         fontWeight: FontWeight.bold,
                         overflow: TextOverflow.ellipsis,
                       ),

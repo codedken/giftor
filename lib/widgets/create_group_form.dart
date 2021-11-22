@@ -2,6 +2,7 @@ import '../my_packages/my_packages.dart';
 import '../providers/group_provider.dart';
 import '../providers/auth_provider.dart';
 import '../models/group/group.dart';
+import '../models/my_shared_preferences.dart';
 
 class CreateGroupForm extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _CreateGroupFormState extends State<CreateGroupForm> {
   TextEditingController _purposeController = TextEditingController();
   String _title = '';
   String _purpose = '';
+  final _userData = MySharedPreferences.userData;
   bool _isLoading = false;
 
   @override
@@ -34,10 +36,12 @@ class _CreateGroupFormState extends State<CreateGroupForm> {
       listen: false,
     ).getCurrentUserId;
 
+    final person = MySharedPreferences.getUser(_userData);
     Group group = Group(
       title: _title,
       purpose: _purpose,
       creatorId: currentUserId,
+      creatorName: person.name,
       createdAt: DateTime.now(),
     );
     await Provider.of<GroupProvider>(

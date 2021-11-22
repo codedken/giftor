@@ -25,11 +25,13 @@ class _$GroupTearOff {
       {String? title,
       String? purpose,
       String? creatorId,
+      String? creatorName,
       DateTime? createdAt}) {
     return _Group(
       title: title,
       purpose: purpose,
       creatorId: creatorId,
+      creatorName: creatorName,
       createdAt: createdAt,
     );
   }
@@ -47,6 +49,7 @@ mixin _$Group {
   String? get title => throw _privateConstructorUsedError;
   String? get purpose => throw _privateConstructorUsedError;
   String? get creatorId => throw _privateConstructorUsedError;
+  String? get creatorName => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -59,7 +62,11 @@ abstract class $GroupCopyWith<$Res> {
   factory $GroupCopyWith(Group value, $Res Function(Group) then) =
       _$GroupCopyWithImpl<$Res>;
   $Res call(
-      {String? title, String? purpose, String? creatorId, DateTime? createdAt});
+      {String? title,
+      String? purpose,
+      String? creatorId,
+      String? creatorName,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -75,6 +82,7 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
     Object? title = freezed,
     Object? purpose = freezed,
     Object? creatorId = freezed,
+    Object? creatorName = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -90,6 +98,10 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as String?,
+      creatorName: creatorName == freezed
+          ? _value.creatorName
+          : creatorName // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -104,7 +116,11 @@ abstract class _$GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
       __$GroupCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? title, String? purpose, String? creatorId, DateTime? createdAt});
+      {String? title,
+      String? purpose,
+      String? creatorId,
+      String? creatorName,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -121,6 +137,7 @@ class __$GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
     Object? title = freezed,
     Object? purpose = freezed,
     Object? creatorId = freezed,
+    Object? creatorName = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_Group(
@@ -136,6 +153,10 @@ class __$GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as String?,
+      creatorName: creatorName == freezed
+          ? _value.creatorName
+          : creatorName // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -147,7 +168,12 @@ class __$GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Group extends _Group with DiagnosticableTreeMixin {
-  _$_Group({this.title, this.purpose, this.creatorId, this.createdAt})
+  _$_Group(
+      {this.title,
+      this.purpose,
+      this.creatorId,
+      this.creatorName,
+      this.createdAt})
       : super._();
 
   factory _$_Group.fromJson(Map<String, dynamic> json) =>
@@ -160,11 +186,13 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
   @override
   final String? creatorId;
   @override
+  final String? creatorName;
+  @override
   final DateTime? createdAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Group(title: $title, purpose: $purpose, creatorId: $creatorId, createdAt: $createdAt)';
+    return 'Group(title: $title, purpose: $purpose, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt)';
   }
 
   @override
@@ -175,6 +203,7 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('purpose', purpose))
       ..add(DiagnosticsProperty('creatorId', creatorId))
+      ..add(DiagnosticsProperty('creatorName', creatorName))
       ..add(DiagnosticsProperty('createdAt', createdAt));
   }
 
@@ -190,6 +219,9 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
             (identical(other.creatorId, creatorId) ||
                 const DeepCollectionEquality()
                     .equals(other.creatorId, creatorId)) &&
+            (identical(other.creatorName, creatorName) ||
+                const DeepCollectionEquality()
+                    .equals(other.creatorName, creatorName)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)));
@@ -201,6 +233,7 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(purpose) ^
       const DeepCollectionEquality().hash(creatorId) ^
+      const DeepCollectionEquality().hash(creatorName) ^
       const DeepCollectionEquality().hash(createdAt);
 
   @JsonKey(ignore: true)
@@ -219,6 +252,7 @@ abstract class _Group extends Group {
       {String? title,
       String? purpose,
       String? creatorId,
+      String? creatorName,
       DateTime? createdAt}) = _$_Group;
   _Group._() : super._();
 
@@ -230,6 +264,8 @@ abstract class _Group extends Group {
   String? get purpose => throw _privateConstructorUsedError;
   @override
   String? get creatorId => throw _privateConstructorUsedError;
+  @override
+  String? get creatorName => throw _privateConstructorUsedError;
   @override
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @override

@@ -48,48 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  void _logout() async {
-    await Provider.of<AuthProvider>(
-      context,
-      listen: false,
-    ).notify();
-    await Alert(
-      context: context,
-      type: AlertType.none,
-      style: kAlertStyle,
-      content: Text(
-        'Do you want to sign out?',
-        style: TextStyle(
-          color: Colors.grey[600],
-        ),
-      ),
-      buttons: [
-        myDialogButton(
-          ctx: context,
-          btnText: 'Yes',
-          btnColor: Color(0xff1323B4).withOpacity(0.9),
-          onTap: () async {
-            Provider.of<AuthProvider>(
-              context,
-              listen: false,
-            ).logout();
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              LoginScreen.routeName,
-              (Route route) => false,
-            );
-          },
-        ),
-        myDialogButton(
-          ctx: context,
-          btnText: 'Cancel',
-          btnColor: Color(0xffBE123C),
-          onTap: () => Navigator.of(context).pop(),
-        ),
-      ],
-    ).show();
-  }
-
   void _createGroupDialog() async {
     await showMaterialModalBottomSheet(
       context: context,
@@ -134,6 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    );
     return Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
@@ -171,122 +133,64 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        CachedNetworkImage(
-                          imageUrl: person!.imageUrl!,
-                          imageBuilder: (ctx, imageProvider) => CircleAvatar(
-                            radius: 30.0,
-                            backgroundColor: Colors.white,
-                            child: CircleAvatar(
-                              radius: 26.0,
-                              backgroundImage: imageProvider,
-                            ),
-                          ),
-                          placeholder: (ctx, url) => CircleAvatar(
-                            radius: 30.0,
-                            backgroundColor: Colors.white,
-                            child: CircleAvatar(
-                              radius: 8.0,
-                              backgroundColor: Colors.transparent,
-                              child: CircularProgressIndicator(
-                                color: Colors.grey,
+                    Header(ctx: context, person: person),
+                    SizedBox(height: 32.0),
+                    Hero(
+                      tag: 'home-buttons',
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            HomeButton(
+                              btnColor: Color(0xff1323B4).withOpacity(0.9),
+                              btnText: 'Create group',
+                              onTap: _createGroupDialog,
+                              btnIcon: FaIcon(
+                                FontAwesomeIcons.pen,
+                                color: Colors.white,
+                                size: 20.0,
                               ),
                             ),
-                          ),
-                        ),
-                        Text(
-                          kAppName,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontFamily: 'Lobster',
-                          ),
-                        ),
-                        PopupMenuButton(
-                          offset: Offset(-24, 36),
-                          padding: const EdgeInsets.all(0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12.0),
-                              bottomLeft: Radius.circular(12.0),
-                              bottomRight: Radius.circular(12.0),
-                            ),
-                          ),
-                          icon: const Icon(
-                            Icons.more_vert,
-                            color: Colors.white,
-                          ),
-                          iconSize: 36.0,
-                          itemBuilder: (ctx) => [
-                            PopupMenuItem(
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.power_settings_new_rounded,
-                                    color: Colors.red,
-                                  ),
-                                  SizedBox(width: 8.0),
-                                  Text(
-                                    'Sign Out',
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
+                            SizedBox(width: 8.0),
+                            HomeButton(
+                              btnColor: Color(0xffBE123C),
+                              btnText: 'Join group',
+                              onTap: _joinGroupDialog,
+                              btnIcon: FaIcon(
+                                FontAwesomeIcons.users,
+                                color: Colors.white,
+                                size: 20.0,
                               ),
-                              onTap: _logout,
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 32.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        HomeButton(
-                          btnColor: Color(0xff1323B4).withOpacity(0.9),
-                          btnText: 'Create group',
-                          onTap: _createGroupDialog,
-                          btnIcon: FaIcon(
-                            FontAwesomeIcons.pen,
-                            color: Colors.white,
-                            size: 20.0,
-                          ),
-                        ),
-                        SizedBox(width: 8.0),
-                        HomeButton(
-                          btnColor: Color(0xffBE123C),
-                          btnText: 'Join group',
-                          onTap: _joinGroupDialog,
-                          btnIcon: FaIcon(
-                            FontAwesomeIcons.users,
-                            color: Colors.white,
-                            size: 20.0,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     SizedBox(height: 15.0),
-                    TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Color(0xff000000).withOpacity(0.3),
-                          size: 28.0,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: 'Search group',
-                        hintStyle: kAuthInputHintStyle,
-                        contentPadding: kAuthInputPadding,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                          borderSide: BorderSide.none,
+                    Hero(
+                      tag: 'search-input',
+                      child: Material(
+                        color: Colors.transparent,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Color(0xff000000).withOpacity(0.3),
+                              size: 28.0,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'Search group',
+                            hintStyle: kAuthInputHintStyle.copyWith(
+                              fontSize: 16.0,
+                            ),
+                            contentPadding: kAuthInputPadding,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -305,7 +209,52 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: 15.0),
                     Expanded(
-                      child: Container(),
+                      child: Consumer<GroupProvider>(
+                        builder: (ctx, group, _) => Container(
+                          alignment: group.allGroupsList.isEmpty
+                              ? Alignment.center
+                              : Alignment.topCenter,
+                          child: SingleChildScrollView(
+                            child: group.allGroupsList.isEmpty
+                                ? Text(
+                                    'No group yet. Create or join one',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : Column(
+                                    children: group.allGroupsList.map(
+                                      (value) {
+                                        return GroupCard(
+                                          groupName: value.title!,
+                                          createdByText:
+                                              authProvider.isMe(value.creatorId)
+                                                  ? 'Me'
+                                                  : value.creatorName!,
+                                          statusText:
+                                              authProvider.isMe(value.creatorId)
+                                                  ? 'Owner'
+                                                  : 'Member',
+                                          onTap: () {
+                                            authProvider.isMe(value.creatorId)
+                                                ? Navigator.pushNamed(
+                                                    context,
+                                                    ParticipantsScreen
+                                                        .routeName,
+                                                  )
+                                                : Navigator.pushNamed(
+                                                    context,
+                                                    PickRecipientScreen
+                                                        .routeName,
+                                                  );
+                                          },
+                                        );
+                                      },
+                                    ).toList(),
+                                  ),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
