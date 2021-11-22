@@ -70,9 +70,9 @@ PageTransition pageTransitionWidget(Widget widget) {
   return PageTransition(
     child: widget,
     type: PageTransitionType.rightToLeftWithFade,
-    duration: const Duration(milliseconds: 800),
-    reverseDuration: const Duration(milliseconds: 800),
-    curve: Curves.easeInOut,
+    duration: const Duration(milliseconds: 1500),
+    reverseDuration: const Duration(milliseconds: 1500),
+    curve: Curves.fastOutSlowIn,
   );
 }
 

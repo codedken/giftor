@@ -9,7 +9,6 @@ class GroupProvider with ChangeNotifier {
   String _usersCollection = 'users';
   String _groups = 'groups';
   String _members = 'members';
-  String name = '';
   final _userData = MySharedPreferences.userData;
   List<Group> _allGroupsList = [];
 
@@ -42,9 +41,15 @@ class GroupProvider with ChangeNotifier {
       final selectedGroup = staticGroupCollSnapshot.docs
           .firstWhere((group) => group.id == groupId);
 
+      final userData = await _db
+          .collection(_usersCollection)
+          .doc(selectedGroup.get('creatorId'))
+          .get();
+      final name = userData.get('name');
       collGroup.add(Group(
         title: selectedGroup.get('title'),
         creatorId: selectedGroup.get('creatorId'),
+        creatorName: name,
         createdAt: DateTime.parse(selectedGroup.get('createdAt')),
         purpose: selectedGroup.get('purpose'),
       ));
@@ -55,13 +60,6 @@ class GroupProvider with ChangeNotifier {
 
   List<Group> get allGroupsList {
     return [..._allGroupsList];
-  }
-
-  void getGroupOwnerName(String? id) async {
-    final _docRef = _db.collection(_usersCollection).doc(id);
-    final userData = await _docRef.get();
-    name = userData.get('name');
-    print(name);
   }
 
   Future<bool> isMemberExists(String userId, String groupId) async {
@@ -81,6 +79,7 @@ class GroupProvider with ChangeNotifier {
     return Group(
       creatorId: group.get('creatorId'),
       title: group.get('title'),
+      creatorName: group.get('creatorName'),
       purpose: group.get('purpose'),
       createdAt: DateTime.parse(group.get('createdAt')),
     );
@@ -106,18 +105,23 @@ class GroupProvider with ChangeNotifier {
         await membersColl.doc(userId).set(member.toJson());
       }
 
-      await updateGroupList(userId, groupId);
-      final group = await getGroup(groupId);
-      _allGroupsList.add(group);
+      final result = await updateGroupList(userId, groupId);
+      if (result != false) {
+        final group = await getGroup(groupId);
+        _allGroupsList.add(group);
+      } else {
+        throw 'error';
+      }
     } on FirebaseException catch (e) {
       throw e;
     } catch (e) {
       throw e;
     }
+    notifyListeners();
   }
 
   //update groups
-  Future<void> updateGroupList(String? userId, String? groupId) async {
+  Future<bool?> updateGroupList(String? userId, String? groupId) async {
     final _docRef = _db.collection(_usersCollection).doc(userId);
     final docSnapshot = await _docRef.get();
     List groups = docSnapshot.get(_groups);
@@ -125,8 +129,9 @@ class GroupProvider with ChangeNotifier {
       _docRef.update({
         _groups: FieldValue.arrayUnion([groupId]),
       });
+      return true;
     } else {
-      return null;
+      return false;
     }
   }
 

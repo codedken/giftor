@@ -13,6 +13,7 @@ class Group with _$Group {
     @required String? title,
     @required String? purpose,
     @required String? creatorId,
+    @required String? creatorName,
     @required DateTime? createdAt,
   }) = _Group;
 
