@@ -1,3 +1,6 @@
+import 'package:google_fonts/google_fonts.dart';
+
+import '../constants_and_methods.dart';
 import '../my_packages/my_packages.dart';
 
 import '../providers/group_provider.dart';
@@ -13,10 +16,11 @@ class _JoinGroupFormState extends State<JoinGroupForm> {
   String _groupCode = '';
   String errorText = '';
   bool isTextEmpty = true;
-
+  bool _isLoading = false;
   void _submit() async {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
+    setState(() => _isLoading = true);
     final joinGroupProvider = Provider.of<GroupProvider>(
       context,
       listen: false,
@@ -31,6 +35,7 @@ class _JoinGroupFormState extends State<JoinGroupForm> {
         isTextEmpty = false;
         errorText = 'Group does not exist';
       });
+      setState(() => _isLoading = false);
       return;
     }
     setState(() {
@@ -47,6 +52,7 @@ class _JoinGroupFormState extends State<JoinGroupForm> {
         isTextEmpty = false;
         errorText = 'You are a member of this group';
       });
+      setState(() => _isLoading = false);
       return;
     }
 
@@ -86,7 +92,9 @@ class _JoinGroupFormState extends State<JoinGroupForm> {
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 hintText: 'Enter Code',
+                hintStyle: kAuthInputHintStyle,
               ),
+              style: TextStyle(fontFamily: GoogleFonts.roboto().fontFamily),
               validator: (value) {
                 if (value!.isEmpty) {
                   setState(() {
@@ -109,58 +117,62 @@ class _JoinGroupFormState extends State<JoinGroupForm> {
               ),
             ),
           const SizedBox(height: 8.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: SizedBox(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color(0xff1323B4).withOpacity(0.9),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      elevation: 12.0,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12.0,
+          _isLoading
+              ? Center(
+                  child: LinearProgressIndicator(),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xff1323B4).withOpacity(0.9),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            elevation: 12.0,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12.0,
+                            ),
+                          ),
+                          onPressed: _submit,
+                          child: Text(
+                            'Join',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                    onPressed: _submit,
-                    child: Text(
-                      'Join',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    const SizedBox(width: 8.0),
+                    Expanded(
+                      child: SizedBox(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xffBE123C),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            elevation: 12.0,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12.0,
+                            ),
+                          ),
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ),
-              const SizedBox(width: 8.0),
-              Expanded(
-                child: SizedBox(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color(0xffBE123C),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      elevation: 12.0,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12.0,
-                      ),
-                    ),
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
           const SizedBox(height: 20.0),
         ],
       ),

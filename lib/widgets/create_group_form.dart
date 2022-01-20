@@ -1,3 +1,6 @@
+import 'package:giftor/constants_and_methods.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../my_packages/my_packages.dart';
 import '../providers/group_provider.dart';
 import '../providers/auth_provider.dart';
@@ -37,7 +40,9 @@ class _CreateGroupFormState extends State<CreateGroupForm> {
     ).getCurrentUserId;
 
     final person = MySharedPreferences.getUser(_userData);
+    String _id = nanoid(10);
     Group group = Group(
+      id: _id,
       title: _title,
       purpose: _purpose,
       creatorId: currentUserId,
@@ -89,7 +94,9 @@ class _CreateGroupFormState extends State<CreateGroupForm> {
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               hintText: 'group name',
+              hintStyle: kAuthInputHintStyle,
             ),
+            style: TextStyle(fontFamily: GoogleFonts.roboto().fontFamily),
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please provide group name';
@@ -105,7 +112,9 @@ class _CreateGroupFormState extends State<CreateGroupForm> {
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               hintText: 'purpose for sharing',
+              hintStyle: kAuthInputHintStyle,
             ),
+            style: TextStyle(fontFamily: GoogleFonts.roboto().fontFamily),
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter purpose';

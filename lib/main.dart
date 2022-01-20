@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import './providers/group_provider.dart';
 import './providers/auth_provider.dart';
+import './models/group/group.dart';
 import './models/my_shared_preferences.dart';
 import './screens/screens.dart';
 import './constants_and_methods.dart';
@@ -12,6 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await MySharedPreferences.init();
+  kShowBottomStatusBar;
   runApp(Giftor());
 }
 
@@ -23,8 +26,9 @@ class Giftor extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => AuthProvider(),
         ),
-        ChangeNotifierProvider(
+        ChangeNotifierProxyProvider<AuthProvider, GroupProvider>(
           create: (ctx) => GroupProvider(),
+          update: (ctx, auth, group) => group!..setAuth(auth),
         ),
       ],
       child: MaterialApp(
@@ -36,9 +40,11 @@ class Giftor extends StatelessWidget {
           ).copyWith(
             secondary: Colors.red,
           ),
-          fontFamily: 'Kodchasan',
+          fontFamily: GoogleFonts.kodchasan().fontFamily,
         ),
-        home: AuthScreen(),
+        home: MySharedPreferences.exists(MySharedPreferences.userData)
+            ? HomeScreen()
+            : AuthScreen(),
         onGenerateRoute: (RouteSettings page) {
           switch (page.name) {
             case AuthScreen.routeName:
@@ -47,10 +53,16 @@ class Giftor extends StatelessWidget {
               return pageTransitionWidget(HomeScreen());
             case LoginScreen.routeName:
               return pageTransitionWidget(LoginScreen());
+            case SettingsScreen.routeName:
+              return pageTransitionWidget(SettingsScreen());
             case ParticipantsScreen.routeName:
-              return pageTransitionWidget(ParticipantsScreen());
+              final arg = page.arguments as Group;
+              return pageTransitionWidget(ParticipantsScreen(
+                group: arg,
+              ));
             case PickRecipientScreen.routeName:
-              return pageTransitionWidget(PickRecipientScreen());
+              final arg = page.arguments as String;
+              return pageTransitionWidget(PickRecipientScreen(arg));
             case RegisterScreen.routeName:
               return pageTransitionWidget(RegisterScreen());
             case ResetPasswordScreen.routeName:

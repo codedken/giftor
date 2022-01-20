@@ -49,28 +49,28 @@ class AuthExceptionHandler {
     String errorMessage;
     switch (exceptionCode) {
       case AuthResultStatus.invalidEmail:
-        errorMessage = "Invalid email address";
+        errorMessage = "invalid email address";
         break;
       case AuthResultStatus.wrongPassword:
-        errorMessage = "Wrong password";
+        errorMessage = "wrong password";
         break;
       case AuthResultStatus.userNotFound:
-        errorMessage = "Email not registered";
+        errorMessage = "user does not exist";
         break;
       case AuthResultStatus.userDisabled:
-        errorMessage = "User with this email has been disabled";
+        errorMessage = "user with this email has been disabled";
         break;
       case AuthResultStatus.tooManyRequests:
-        errorMessage = "Too many requests. Try again after 1 minute";
+        errorMessage = "too many requests. Try again after 1 minute";
         break;
       case AuthResultStatus.operationNotAllowed:
         errorMessage = "Email and Password sign-in is not enabled";
         break;
       case AuthResultStatus.emailAlreadyExists:
-        errorMessage = "email already exists";
+        errorMessage = "user already exists";
         break;
       default:
-        errorMessage = "An unknown error occurred";
+        errorMessage = "an unknown error occurred";
     }
 
     return errorMessage;

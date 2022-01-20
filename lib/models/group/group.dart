@@ -10,6 +10,7 @@ class Group with _$Group {
   const Group._();
 
   factory Group({
+    @required String? id,
     @required String? title,
     @required String? purpose,
     @required String? creatorId,

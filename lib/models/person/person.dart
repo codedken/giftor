@@ -17,14 +17,14 @@ class Person with _$Person {
     @required String? imageUrl,
     @Default(false) bool isSelected,
     @Default(null) String? selectedUserId,
-  }) = _Person;
+  }) = PersonSelect;
 
   factory Person.user({
     @required String? name,
     @required String? email,
     @required String? phoneNo,
     @required String? imageUrl,
-    @required List<String>? groups,
+    @required List<dynamic>? groups,
     DateTime? createdAt,
   }) = PersonUser;
 

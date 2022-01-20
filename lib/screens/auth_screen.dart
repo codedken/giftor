@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/rounded_circle_group.dart';
-import '../widgets/stacked_circle.dart';
-import '../widgets/auth_button.dart';
+import '../my_packages/my_packages.dart';
+
+import '../widgets/widgets.dart';
 
 import './screens.dart';
 
@@ -25,15 +25,6 @@ class AuthScreen extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: Color(0xff0A0616),
-                image: DecorationImage(
-                  image: AssetImage('assets/gifs/animatedexchange.gif'),
-                  alignment: Alignment.topCenter,
-                  fit: BoxFit.fitWidth,
-                  colorFilter: ColorFilter.mode(
-                    Colors.black87,
-                    BlendMode.darken,
-                  ),
-                ),
               ),
             ),
             Positioned(
@@ -99,7 +90,7 @@ class AuthScreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 60,
-                        fontFamily: 'Lobster',
+                        fontFamily: GoogleFonts.lobster().fontFamily,
                       ),
                     ),
                     SizedBox(height: 8.0),
@@ -108,7 +99,6 @@ class AuthScreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontFamily: 'Kodchasan',
                       ),
                       textAlign: TextAlign.center,
                     ),

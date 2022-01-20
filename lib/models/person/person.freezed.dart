@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 Person _$PersonFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType'] as String?) {
     case 'default':
-      return _Person.fromJson(json);
+      return PersonSelect.fromJson(json);
     case 'user':
       return PersonUser.fromJson(json);
     case 'saveLocally':
@@ -32,7 +32,7 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
 class _$PersonTearOff {
   const _$PersonTearOff();
 
-  _Person call(
+  PersonSelect call(
       {String? id,
       String? name,
       String? email,
@@ -40,7 +40,7 @@ class _$PersonTearOff {
       String? imageUrl,
       bool isSelected = false,
       String? selectedUserId = null}) {
-    return _Person(
+    return PersonSelect(
       id: id,
       name: name,
       email: email,
@@ -56,7 +56,7 @@ class _$PersonTearOff {
       String? email,
       String? phoneNo,
       String? imageUrl,
-      List<String>? groups,
+      List<dynamic>? groups,
       DateTime? createdAt}) {
     return PersonUser(
       name: name,
@@ -104,7 +104,7 @@ mixin _$Person {
             String? imageUrl, bool isSelected, String? selectedUserId)
         $default, {
     required TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)
         user,
     required TResult Function(String? id, String? name, String? email,
             String? phoneNo, String? imageUrl)
@@ -117,7 +117,7 @@ mixin _$Person {
             String? imageUrl, bool isSelected, String? selectedUserId)?
         $default, {
     TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)?
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)?
         user,
     TResult Function(String? id, String? name, String? email, String? phoneNo,
             String? imageUrl)?
@@ -130,7 +130,7 @@ mixin _$Person {
             String? imageUrl, bool isSelected, String? selectedUserId)?
         $default, {
     TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)?
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)?
         user,
     TResult Function(String? id, String? name, String? email, String? phoneNo,
             String? imageUrl)?
@@ -140,21 +140,21 @@ mixin _$Person {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_Person value) $default, {
+    TResult Function(PersonSelect value) $default, {
     required TResult Function(PersonUser value) user,
     required TResult Function(PersonSaveLocally value) saveLocally,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_Person value)? $default, {
+    TResult Function(PersonSelect value)? $default, {
     TResult Function(PersonUser value)? user,
     TResult Function(PersonSaveLocally value)? saveLocally,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Person value)? $default, {
+    TResult Function(PersonSelect value)? $default, {
     TResult Function(PersonUser value)? user,
     TResult Function(PersonSaveLocally value)? saveLocally,
     required TResult orElse(),
@@ -209,9 +209,10 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
-  factory _$PersonCopyWith(_Person value, $Res Function(_Person) then) =
-      __$PersonCopyWithImpl<$Res>;
+abstract class $PersonSelectCopyWith<$Res> implements $PersonCopyWith<$Res> {
+  factory $PersonSelectCopyWith(
+          PersonSelect value, $Res Function(PersonSelect) then) =
+      _$PersonSelectCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
@@ -224,13 +225,14 @@ abstract class _$PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
-    implements _$PersonCopyWith<$Res> {
-  __$PersonCopyWithImpl(_Person _value, $Res Function(_Person) _then)
-      : super(_value, (v) => _then(v as _Person));
+class _$PersonSelectCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
+    implements $PersonSelectCopyWith<$Res> {
+  _$PersonSelectCopyWithImpl(
+      PersonSelect _value, $Res Function(PersonSelect) _then)
+      : super(_value, (v) => _then(v as PersonSelect));
 
   @override
-  _Person get _value => super._value as _Person;
+  PersonSelect get _value => super._value as PersonSelect;
 
   @override
   $Res call({
@@ -242,7 +244,7 @@ class __$PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
     Object? isSelected = freezed,
     Object? selectedUserId = freezed,
   }) {
-    return _then(_Person(
+    return _then(PersonSelect(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -277,8 +279,8 @@ class __$PersonCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Person extends _Person with DiagnosticableTreeMixin {
-  _$_Person(
+class _$PersonSelect extends PersonSelect with DiagnosticableTreeMixin {
+  _$PersonSelect(
       {this.id,
       this.name,
       this.email,
@@ -288,8 +290,8 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
       this.selectedUserId = null})
       : super._();
 
-  factory _$_Person.fromJson(Map<String, dynamic> json) =>
-      _$$_PersonFromJson(json);
+  factory _$PersonSelect.fromJson(Map<String, dynamic> json) =>
+      _$$PersonSelectFromJson(json);
 
   @override
   final String? id;
@@ -330,7 +332,7 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Person &&
+        (other is PersonSelect &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
@@ -364,8 +366,8 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  _$PersonCopyWith<_Person> get copyWith =>
-      __$PersonCopyWithImpl<_Person>(this, _$identity);
+  $PersonSelectCopyWith<PersonSelect> get copyWith =>
+      _$PersonSelectCopyWithImpl<PersonSelect>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -374,7 +376,7 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
             String? imageUrl, bool isSelected, String? selectedUserId)
         $default, {
     required TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)
         user,
     required TResult Function(String? id, String? name, String? email,
             String? phoneNo, String? imageUrl)
@@ -391,7 +393,7 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
             String? imageUrl, bool isSelected, String? selectedUserId)?
         $default, {
     TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)?
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)?
         user,
     TResult Function(String? id, String? name, String? email, String? phoneNo,
             String? imageUrl)?
@@ -408,7 +410,7 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
             String? imageUrl, bool isSelected, String? selectedUserId)?
         $default, {
     TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)?
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)?
         user,
     TResult Function(String? id, String? name, String? email, String? phoneNo,
             String? imageUrl)?
@@ -425,7 +427,7 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_Person value) $default, {
+    TResult Function(PersonSelect value) $default, {
     required TResult Function(PersonUser value) user,
     required TResult Function(PersonSaveLocally value) saveLocally,
   }) {
@@ -435,7 +437,7 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_Person value)? $default, {
+    TResult Function(PersonSelect value)? $default, {
     TResult Function(PersonUser value)? user,
     TResult Function(PersonSaveLocally value)? saveLocally,
   }) {
@@ -445,7 +447,7 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Person value)? $default, {
+    TResult Function(PersonSelect value)? $default, {
     TResult Function(PersonUser value)? user,
     TResult Function(PersonSaveLocally value)? saveLocally,
     required TResult orElse(),
@@ -458,22 +460,23 @@ class _$_Person extends _Person with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PersonToJson(this)..['runtimeType'] = 'default';
+    return _$$PersonSelectToJson(this)..['runtimeType'] = 'default';
   }
 }
 
-abstract class _Person extends Person {
-  factory _Person(
+abstract class PersonSelect extends Person {
+  factory PersonSelect(
       {String? id,
       String? name,
       String? email,
       String? phoneNo,
       String? imageUrl,
       bool isSelected,
-      String? selectedUserId}) = _$_Person;
-  _Person._() : super._();
+      String? selectedUserId}) = _$PersonSelect;
+  PersonSelect._() : super._();
 
-  factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;
+  factory PersonSelect.fromJson(Map<String, dynamic> json) =
+      _$PersonSelect.fromJson;
 
   String? get id => throw _privateConstructorUsedError;
   @override
@@ -488,7 +491,8 @@ abstract class _Person extends Person {
   String? get selectedUserId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PersonCopyWith<_Person> get copyWith => throw _privateConstructorUsedError;
+  $PersonSelectCopyWith<PersonSelect> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -502,7 +506,7 @@ abstract class $PersonUserCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? email,
       String? phoneNo,
       String? imageUrl,
-      List<String>? groups,
+      List<dynamic>? groups,
       DateTime? createdAt});
 }
 
@@ -544,7 +548,7 @@ class _$PersonUserCopyWithImpl<$Res> extends _$PersonCopyWithImpl<$Res>
       groups: groups == freezed
           ? _value.groups
           : groups // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<dynamic>?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -577,7 +581,7 @@ class _$PersonUser extends PersonUser with DiagnosticableTreeMixin {
   @override
   final String? imageUrl;
   @override
-  final List<String>? groups;
+  final List<dynamic>? groups;
   @override
   final DateTime? createdAt;
 
@@ -642,7 +646,7 @@ class _$PersonUser extends PersonUser with DiagnosticableTreeMixin {
             String? imageUrl, bool isSelected, String? selectedUserId)
         $default, {
     required TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)
         user,
     required TResult Function(String? id, String? name, String? email,
             String? phoneNo, String? imageUrl)
@@ -658,7 +662,7 @@ class _$PersonUser extends PersonUser with DiagnosticableTreeMixin {
             String? imageUrl, bool isSelected, String? selectedUserId)?
         $default, {
     TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)?
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)?
         user,
     TResult Function(String? id, String? name, String? email, String? phoneNo,
             String? imageUrl)?
@@ -674,7 +678,7 @@ class _$PersonUser extends PersonUser with DiagnosticableTreeMixin {
             String? imageUrl, bool isSelected, String? selectedUserId)?
         $default, {
     TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)?
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)?
         user,
     TResult Function(String? id, String? name, String? email, String? phoneNo,
             String? imageUrl)?
@@ -690,7 +694,7 @@ class _$PersonUser extends PersonUser with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_Person value) $default, {
+    TResult Function(PersonSelect value) $default, {
     required TResult Function(PersonUser value) user,
     required TResult Function(PersonSaveLocally value) saveLocally,
   }) {
@@ -700,7 +704,7 @@ class _$PersonUser extends PersonUser with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_Person value)? $default, {
+    TResult Function(PersonSelect value)? $default, {
     TResult Function(PersonUser value)? user,
     TResult Function(PersonSaveLocally value)? saveLocally,
   }) {
@@ -710,7 +714,7 @@ class _$PersonUser extends PersonUser with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Person value)? $default, {
+    TResult Function(PersonSelect value)? $default, {
     TResult Function(PersonUser value)? user,
     TResult Function(PersonSaveLocally value)? saveLocally,
     required TResult orElse(),
@@ -733,7 +737,7 @@ abstract class PersonUser extends Person {
       String? email,
       String? phoneNo,
       String? imageUrl,
-      List<String>? groups,
+      List<dynamic>? groups,
       DateTime? createdAt}) = _$PersonUser;
   PersonUser._() : super._();
 
@@ -748,7 +752,7 @@ abstract class PersonUser extends Person {
   String? get phoneNo => throw _privateConstructorUsedError;
   @override
   String? get imageUrl => throw _privateConstructorUsedError;
-  List<String>? get groups => throw _privateConstructorUsedError;
+  List<dynamic>? get groups => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
@@ -892,7 +896,7 @@ class _$PersonSaveLocally extends PersonSaveLocally
             String? imageUrl, bool isSelected, String? selectedUserId)
         $default, {
     required TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)
         user,
     required TResult Function(String? id, String? name, String? email,
             String? phoneNo, String? imageUrl)
@@ -908,7 +912,7 @@ class _$PersonSaveLocally extends PersonSaveLocally
             String? imageUrl, bool isSelected, String? selectedUserId)?
         $default, {
     TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)?
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)?
         user,
     TResult Function(String? id, String? name, String? email, String? phoneNo,
             String? imageUrl)?
@@ -924,7 +928,7 @@ class _$PersonSaveLocally extends PersonSaveLocally
             String? imageUrl, bool isSelected, String? selectedUserId)?
         $default, {
     TResult Function(String? name, String? email, String? phoneNo,
-            String? imageUrl, List<String>? groups, DateTime? createdAt)?
+            String? imageUrl, List<dynamic>? groups, DateTime? createdAt)?
         user,
     TResult Function(String? id, String? name, String? email, String? phoneNo,
             String? imageUrl)?
@@ -940,7 +944,7 @@ class _$PersonSaveLocally extends PersonSaveLocally
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_Person value) $default, {
+    TResult Function(PersonSelect value) $default, {
     required TResult Function(PersonUser value) user,
     required TResult Function(PersonSaveLocally value) saveLocally,
   }) {
@@ -950,7 +954,7 @@ class _$PersonSaveLocally extends PersonSaveLocally
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult Function(_Person value)? $default, {
+    TResult Function(PersonSelect value)? $default, {
     TResult Function(PersonUser value)? user,
     TResult Function(PersonSaveLocally value)? saveLocally,
   }) {
@@ -960,7 +964,7 @@ class _$PersonSaveLocally extends PersonSaveLocally
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Person value)? $default, {
+    TResult Function(PersonSelect value)? $default, {
     TResult Function(PersonUser value)? user,
     TResult Function(PersonSaveLocally value)? saveLocally,
     required TResult orElse(),

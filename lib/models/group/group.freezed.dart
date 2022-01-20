@@ -22,12 +22,14 @@ class _$GroupTearOff {
   const _$GroupTearOff();
 
   _Group call(
-      {String? title,
+      {String? id,
+      String? title,
       String? purpose,
       String? creatorId,
       String? creatorName,
       DateTime? createdAt}) {
     return _Group(
+      id: id,
       title: title,
       purpose: purpose,
       creatorId: creatorId,
@@ -46,6 +48,7 @@ const $Group = _$GroupTearOff();
 
 /// @nodoc
 mixin _$Group {
+  String? get id => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get purpose => throw _privateConstructorUsedError;
   String? get creatorId => throw _privateConstructorUsedError;
@@ -62,7 +65,8 @@ abstract class $GroupCopyWith<$Res> {
   factory $GroupCopyWith(Group value, $Res Function(Group) then) =
       _$GroupCopyWithImpl<$Res>;
   $Res call(
-      {String? title,
+      {String? id,
+      String? title,
       String? purpose,
       String? creatorId,
       String? creatorName,
@@ -79,6 +83,7 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? title = freezed,
     Object? purpose = freezed,
     Object? creatorId = freezed,
@@ -86,6 +91,10 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -116,7 +125,8 @@ abstract class _$GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
       __$GroupCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? title,
+      {String? id,
+      String? title,
       String? purpose,
       String? creatorId,
       String? creatorName,
@@ -134,6 +144,7 @@ class __$GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? title = freezed,
     Object? purpose = freezed,
     Object? creatorId = freezed,
@@ -141,6 +152,10 @@ class __$GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
     Object? createdAt = freezed,
   }) {
     return _then(_Group(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -169,7 +184,8 @@ class __$GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Group extends _Group with DiagnosticableTreeMixin {
   _$_Group(
-      {this.title,
+      {this.id,
+      this.title,
       this.purpose,
       this.creatorId,
       this.creatorName,
@@ -179,6 +195,8 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
   factory _$_Group.fromJson(Map<String, dynamic> json) =>
       _$$_GroupFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String? title;
   @override
@@ -192,7 +210,7 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Group(title: $title, purpose: $purpose, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt)';
+    return 'Group(id: $id, title: $title, purpose: $purpose, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt)';
   }
 
   @override
@@ -200,6 +218,7 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Group'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('purpose', purpose))
       ..add(DiagnosticsProperty('creatorId', creatorId))
@@ -211,6 +230,8 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Group &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.purpose, purpose) ||
@@ -230,6 +251,7 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(purpose) ^
       const DeepCollectionEquality().hash(creatorId) ^
@@ -249,7 +271,8 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
 
 abstract class _Group extends Group {
   factory _Group(
-      {String? title,
+      {String? id,
+      String? title,
       String? purpose,
       String? creatorId,
       String? creatorName,
@@ -258,6 +281,8 @@ abstract class _Group extends Group {
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;
 
+  @override
+  String? get id => throw _privateConstructorUsedError;
   @override
   String? get title => throw _privateConstructorUsedError;
   @override

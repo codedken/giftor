@@ -14,3 +14,7 @@ export './rounded_circle_group.dart';
 export './selected_card.dart';
 export './stacked_circle.dart';
 export './header.dart';
+export './footer.dart';
+export './pick_and_delete_btn.dart';
+export './search_input.dart';
+export './create_and_join_btn.dart';

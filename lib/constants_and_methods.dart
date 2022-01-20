@@ -1,33 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 const String kAppName = 'Giftor';
 
 TextStyle kAuthInputHintStyle = TextStyle(
-  fontSize: 18.0,
-  fontWeight: FontWeight.w600,
-  fontFamily: 'Kodchasan',
-  color: Color(0xff000000).withOpacity(0.3),
+  fontSize: 16.0,
+  fontFamily: GoogleFonts.kodchasan().fontFamily,
+  color: kTextColorWithOpacity,
 );
 
+Color kScaffoldColor = const Color(0xff0A0616);
+
+Color kTextColorWithOpacity = const Color(0xff000000).withOpacity(0.2);
+
+//full screen
+void get kShowBottomStatusBar async {
+  await SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [],
+  );
+}
+
+//style for authentication input
 TextStyle kAuthInputTextStyle = TextStyle(
   fontSize: 18.0,
   fontWeight: FontWeight.w500,
-  fontFamily: 'Roboto',
-  color: Color(0xff000000).withOpacity(0.7),
+  fontFamily: GoogleFonts.roboto().fontFamily,
+  color: Color(0xff000000).withOpacity(0.6),
 );
 TextStyle kAuthErrorStyle = TextStyle(
   color: Colors.white,
 );
 
+//style for pop up dialog box
 AlertStyle kAlertStyle = AlertStyle(
   animationType: AnimationType.grow,
   isOverlayTapDismiss: false,
   isCloseButton: false,
   descStyle: TextStyle(fontWeight: FontWeight.bold),
   descTextAlign: TextAlign.start,
-  animationDuration: const Duration(seconds: 1),
+  animationDuration: const Duration(milliseconds: 800),
   alertPadding: const EdgeInsets.all(16.0),
   alertBorder: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(20.0),
@@ -39,43 +54,51 @@ AlertStyle kAlertStyle = AlertStyle(
   ),
 );
 
+//padding for authentication input
 const kAuthInputPadding = const EdgeInsets.symmetric(
   vertical: 16.0,
   horizontal: 8.0,
 );
 
+//style for footer text
 TextStyle kAuthFooterTextStyle = TextStyle(
   color: Colors.white,
-  fontSize: 16.0,
+  fontSize: 12.0,
   fontWeight: FontWeight.bold,
 );
 
+//width for authentication container
 double getAuthContainerWidth(BuildContext context) {
   return MediaQuery.of(context).size.width * 0.80;
 }
 
+//width for the buttons home screen
 double getHomeButtonWidth(BuildContext context) {
   return getHomeContainerWidth(context) * 0.48;
 }
 
+//width for the card of a selected participant
 double getSelectedCardWidth(BuildContext context) {
   return MediaQuery.of(context).size.width * 0.90;
 }
 
+//width for the container in home screen
 double getHomeContainerWidth(BuildContext context) {
   return MediaQuery.of(context).size.width * 0.9;
 }
 
+//screen transition function
 PageTransition pageTransitionWidget(Widget widget) {
   return PageTransition(
     child: widget,
     type: PageTransitionType.rightToLeftWithFade,
-    duration: const Duration(milliseconds: 1500),
-    reverseDuration: const Duration(milliseconds: 1500),
+    duration: const Duration(milliseconds: 900),
+    reverseDuration: const Duration(milliseconds: 900),
     curve: Curves.fastOutSlowIn,
   );
 }
 
+//style/function for custom dialog box
 DialogButton myDialogButton({
   required BuildContext ctx,
   required String btnText,
@@ -98,6 +121,7 @@ DialogButton myDialogButton({
   );
 }
 
+//display dialog box function
 void showAlertBox({
   required BuildContext context,
   required AlertType dialogType,
@@ -127,4 +151,5 @@ void showAlertBox({
   ).show();
 }
 
+//default sizedBox
 const kSpaceBox = SizedBox(height: 4.0);

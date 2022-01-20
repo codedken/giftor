@@ -6,6 +6,7 @@ import './person/person.dart';
 class MySharedPreferences {
   static SharedPreferences? _prefs;
   static const String userData = 'user_data';
+
   static Future<void> init() async =>
       _prefs = await SharedPreferences.getInstance();
 
@@ -24,7 +25,10 @@ class MySharedPreferences {
     return PersonSaveLocally.fromJson(jsonMap);
   }
 
-  static Future<void> clearPrefs() async => await _prefs!.clear();
+  static Future<void> clearPrefs() async {
+    await _prefs!.clear();
+    await _prefs!.reload();
+  }
 
   static bool exists(String keyTitle) => _prefs!.containsKey(keyTitle);
 }
