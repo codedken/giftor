@@ -17,19 +17,17 @@ class HomeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50.0,
-      width: getHomeButtonWidth(context),
+    return Expanded(
       child: ElevatedButton.icon(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-            btnColor,
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(
+            vertical: 16.0,
           ),
-          elevation: MaterialStateProperty.all(16.0),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
+          fixedSize: Size.fromWidth(getHomeButtonWidth(context)),
+          primary: btnColor,
+          elevation: 16.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
           ),
         ),
         icon: btnIcon!,

@@ -44,7 +44,7 @@ class _LoginCardState extends State<LoginCard> {
       await Future.delayed(const Duration(milliseconds: 500));
       _showAlertBox(
         context: context,
-        dialogType: AlertType.error,
+        dialogType: AlertType.none,
         title: null,
         body: AuthExceptionHandler.generateExceptionMessage(statusCode),
       );
@@ -108,6 +108,7 @@ class _LoginCardState extends State<LoginCard> {
               SizedBox(height: 30.0),
               TextFormField(
                 style: kAuthInputTextStyle,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   hintText: 'Email address',
                   hintStyle: kAuthInputHintStyle,
@@ -116,7 +117,8 @@ class _LoginCardState extends State<LoginCard> {
                   errorStyle: kAuthErrorStyle,
                   prefixIcon: Icon(
                     FontAwesomeIcons.envelope,
-                    color: Color(0xff000000).withOpacity(0.3),
+                    color: kTextColorWithOpacity,
+                    size: 20,
                   ),
                   contentPadding: kAuthInputPadding,
                   border: OutlineInputBorder(
@@ -149,13 +151,15 @@ class _LoginCardState extends State<LoginCard> {
                   errorStyle: kAuthErrorStyle,
                   prefixIcon: Icon(
                     Icons.lock_outlined,
-                    color: Color(0xff000000).withOpacity(0.3),
-                    size: 28.0,
+                    color: kTextColorWithOpacity,
+                    size: 22.0,
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      Icons.remove_red_eye_outlined,
-                      color: Color(0xff000000).withOpacity(0.3),
+                      _displayPassword
+                          ? FontAwesomeIcons.eye
+                          : FontAwesomeIcons.eyeSlash,
+                      color: kTextColorWithOpacity,
                     ),
                     onPressed: _showPassword,
                   ),
@@ -183,7 +187,7 @@ class _LoginCardState extends State<LoginCard> {
                 onTap: _signIn,
                 isLoading: _isLoading,
               ),
-              SizedBox(height: 6.0),
+              SizedBox(height: 4.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -192,11 +196,11 @@ class _LoginCardState extends State<LoginCard> {
                       'Register',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () => Navigator.pushReplacementNamed(
+                    onPressed: () => Navigator.pushNamed(
                       context,
                       RegisterScreen.routeName,
                     ),
@@ -206,11 +210,11 @@ class _LoginCardState extends State<LoginCard> {
                       'Forgot password?',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () => Navigator.pushReplacementNamed(
+                    onPressed: () => Navigator.pushNamed(
                       context,
                       ResetPasswordScreen.routeName,
                     ),

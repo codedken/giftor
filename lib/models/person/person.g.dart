@@ -6,7 +6,8 @@ part of 'person.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
+_$PersonSelect _$$PersonSelectFromJson(Map<String, dynamic> json) =>
+    _$PersonSelect(
       id: json['id'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
@@ -16,7 +17,8 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
       selectedUserId: json['selectedUserId'] as String? ?? null,
     );
 
-Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
+Map<String, dynamic> _$$PersonSelectToJson(_$PersonSelect instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'email': instance.email,
@@ -31,8 +33,7 @@ _$PersonUser _$$PersonUserFromJson(Map<String, dynamic> json) => _$PersonUser(
       email: json['email'] as String?,
       phoneNo: json['phoneNo'] as String?,
       imageUrl: json['imageUrl'] as String?,
-      groups:
-          (json['groups'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      groups: json['groups'] as List<dynamic>?,
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),

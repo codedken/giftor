@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
+import '../models/person/person.dart';
 import '../constants_and_methods.dart';
 
 class SelectedCard extends StatelessWidget {
+  final Person person;
+  SelectedCard(this.person);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,13 +37,36 @@ class SelectedCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                const CircleAvatar(
-                  backgroundColor: Color(0xffB0B5C1),
-                  radius: 50.0,
-                  child: CircleAvatar(
-                    radius: 46.0,
-                    backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
+                CachedNetworkImage(
+                  imageUrl: person.imageUrl!,
+                  imageBuilder: (ctx, imageProvider) => CircleAvatar(
+                    radius: 50.0,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                      radius: 46.0,
+                      backgroundImage: imageProvider,
+                    ),
+                  ),
+                  placeholder: (ctx, image) => CircleAvatar(
+                    radius: 50.0,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                      radius: 8.0,
+                      backgroundColor: Colors.transparent,
+                      child: CircularProgressIndicator(
+                        color: const Color(0xffB0B5C1),
+                        strokeWidth: 2.0,
+                      ),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => CircleAvatar(
+                    radius: 50.0,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.person_outline,
+                      color: Colors.grey,
+                      size: 48.0,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8.0),
@@ -56,12 +83,16 @@ class SelectedCard extends StatelessWidget {
                               size: 18.0,
                             ),
                             const SizedBox(width: 8.0),
-                            const Text(
-                              'Charles Callistus',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.35,
+                              child: Text(
+                                '${person.name!}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
@@ -76,7 +107,7 @@ class SelectedCard extends StatelessWidget {
                             ),
                             SizedBox(width: 8.0),
                             Text(
-                              '+2348054848498',
+                              person.phoneNo!,
                               style: TextStyle(
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w600,
@@ -101,7 +132,22 @@ class SelectedCard extends StatelessWidget {
                                 fontSize: 12.0,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  '🤞 Coming soon!!!',
+                                  style: TextStyle(
+                                    color: const Color(
+                                      0xff000000,
+                                    ),
+                                  ),
+                                ),
+                                backgroundColor: const Color(0xffffffff),
+                                padding: EdgeInsets.all(24.0),
+                              ));
+                            },
                           ),
                         ),
                       ],

@@ -1,10 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../my_packages/my_packages.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../providers/auth_provider.dart';
 
@@ -118,17 +115,21 @@ class _RegisterCardState extends State<RegisterCard> {
         context: context,
         body: 'Registration successful',
       );
-    } catch (e) {
+    } on FirebaseException catch (e) {
       FocusScope.of(context).unfocus();
       setState(() => _isLoading = false);
       final statusCode = AuthExceptionHandler.getExceptionStatus(e);
 
       showAlertBox(
         context: context,
-        dialogType: AlertType.error,
+        dialogType: AlertType.none,
         title: 'Error',
         body: AuthExceptionHandler.generateExceptionMessage(statusCode),
       );
+    } catch (e) {
+      FocusScope.of(context).unfocus();
+      setState(() => _isLoading = false);
+      return;
     }
   }
 
@@ -152,7 +153,8 @@ class _RegisterCardState extends State<RegisterCard> {
                     fillColor: Colors.white,
                     prefixIcon: Icon(
                       FontAwesomeIcons.user,
-                      color: Color(0xff000000).withOpacity(0.3),
+                      color: kTextColorWithOpacity,
+                      size: 20.0,
                     ),
                     contentPadding: kAuthInputPadding,
                     border: OutlineInputBorder(
@@ -188,7 +190,8 @@ class _RegisterCardState extends State<RegisterCard> {
                     fillColor: Colors.white,
                     prefixIcon: Icon(
                       FontAwesomeIcons.envelope,
-                      color: Color(0xff000000).withOpacity(0.3),
+                      color: kTextColorWithOpacity,
+                      size: 20.0,
                     ),
                     contentPadding: kAuthInputPadding,
                     border: OutlineInputBorder(
@@ -227,8 +230,8 @@ class _RegisterCardState extends State<RegisterCard> {
                   fillColor: Colors.white,
                   prefixIcon: Icon(
                     Icons.phone_outlined,
-                    size: 28.0,
-                    color: Color(0xff000000).withOpacity(0.3),
+                    size: 22.0,
+                    color: kTextColorWithOpacity,
                   ),
                   contentPadding: kAuthInputPadding,
                   border: OutlineInputBorder(
@@ -268,8 +271,8 @@ class _RegisterCardState extends State<RegisterCard> {
                   fillColor: Colors.white,
                   prefixIcon: Icon(
                     Icons.lock_outlined,
-                    size: 28.0,
-                    color: Color(0xff000000).withOpacity(0.3),
+                    size: 22.0,
+                    color: kTextColorWithOpacity,
                   ),
                   contentPadding: kAuthInputPadding,
                   border: OutlineInputBorder(
@@ -303,8 +306,8 @@ class _RegisterCardState extends State<RegisterCard> {
                   fillColor: Colors.white,
                   prefixIcon: Icon(
                     Icons.lock_outlined,
-                    size: 28.0,
-                    color: Color(0xff000000).withOpacity(0.3),
+                    size: 22.0,
+                    color: kTextColorWithOpacity,
                   ),
                   contentPadding: kAuthInputPadding,
                   border: OutlineInputBorder(
@@ -345,15 +348,14 @@ class _RegisterCardState extends State<RegisterCard> {
                             children: <Widget>[
                               Icon(
                                 Icons.photo_camera_outlined,
-                                color: Color(0xff000000).withOpacity(0.3),
-                                size: 28.0,
+                                color: kTextColorWithOpacity,
+                                size: 24.0,
                               ),
                               Text(
                                 'preview photo',
                                 style: TextStyle(
-                                  color: Color(0xff000000).withOpacity(0.3),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.0,
+                                  color: kTextColorWithOpacity,
+                                  fontSize: 14.0,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -370,6 +372,10 @@ class _RegisterCardState extends State<RegisterCard> {
                       ),
                     ),
                     onPressed: _pickImage,
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0x93000000),
+                      shadowColor: Colors.red,
+                    ),
                   ),
                 ],
               ),
@@ -388,11 +394,11 @@ class _RegisterCardState extends State<RegisterCard> {
                       'Sign In',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () => Navigator.pushReplacementNamed(
+                    onPressed: () => Navigator.pushNamed(
                       context,
                       LoginScreen.routeName,
                     ),
@@ -402,17 +408,18 @@ class _RegisterCardState extends State<RegisterCard> {
                       'Forgot password?',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () => Navigator.pushReplacementNamed(
+                    onPressed: () => Navigator.pushNamed(
                       context,
                       ResetPasswordScreen.routeName,
                     ),
                   ),
                 ],
               ),
+              SizedBox(height: 24.0),
             ],
           ),
         ),

@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../models/participant.dart';
 
 class ParticipantCard extends StatelessWidget {
-  final String participantName;
-  final String participantImageUrl;
-  final String? recipientName;
-  final String? recipientImageUrl;
-  final String giftStatus;
-  final Color? arrowColor;
-
-  ParticipantCard({
-    required this.participantName,
-    required this.participantImageUrl,
-    this.recipientName,
-    this.recipientImageUrl,
-    required this.giftStatus,
-    this.arrowColor,
-  });
-
+  final Participant participant;
+  ParticipantCard(this.participant);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -39,7 +27,7 @@ class ParticipantCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    participantName,
+                    participant.name!,
                     style: TextStyle(
                       color: Color(0xff000000).withOpacity(0.75),
                       fontSize: 16.0,
@@ -48,9 +36,7 @@ class ParticipantCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    recipientName == null
-                        ? 'to: Not selected'
-                        : 'to: $recipientName',
+                    'to: ${participant.pickedUserName ?? 'Not picked'}',
                     style: TextStyle(
                       color: Color(0xff000000).withOpacity(0.58),
                       fontSize: 14.0,
@@ -59,7 +45,7 @@ class ParticipantCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Status: $giftStatus',
+                    'Gift Status: ${participant.giftStatus!}',
                     style: TextStyle(
                       color: Color(0xff000000).withOpacity(0.58),
                       fontSize: 12.0,
@@ -71,7 +57,7 @@ class ParticipantCard extends StatelessWidget {
             ),
             Container(
               child: Row(
-                mainAxisAlignment: recipientName == null
+                mainAxisAlignment: participant.pickedUserName == null
                     ? MainAxisAlignment.end
                     : MainAxisAlignment.spaceBetween,
                 children: [
@@ -81,30 +67,68 @@ class ParticipantCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(44.0),
                     ),
                     elevation: 12.0,
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(participantImageUrl),
-                      radius: recipientName == null ? 22 : 18,
+                    child: CachedNetworkImage(
+                      imageUrl: participant.imgUrl!,
+                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                        radius: participant.pickedUserName == null ? 22 : 18,
+                        backgroundColor: Colors.white,
+                        backgroundImage: imageProvider,
+                      ),
+                      placeholder: (context, url) => CircleAvatar(
+                        radius: participant.pickedUserName == null ? 22 : 18,
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      errorWidget: (ctx, url, error) => CircleAvatar(
+                        radius: participant.pickedUserName == null ? 22 : 18,
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
                   ),
-                  if (recipientName != null)
-                  SizedBox(width: 4.0),
-                  if (recipientName != null)
+                  if (participant.pickedUserName != null) SizedBox(width: 4.0),
+                  if (participant.pickedUserName != null)
                     FaIcon(
                       FontAwesomeIcons.longArrowAltRight,
-                      color: arrowColor,
+                      color: const Color(0xff1DD72F),
                     ),
-                  if (recipientName != null)
-                  SizedBox(width: 4.0),
-                  if (recipientName != null)
+                  if (participant.pickedUserName != null) SizedBox(width: 4.0),
+                  if (participant.pickedUserName != null)
                     Card(
                       margin: const EdgeInsets.all(0.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(44.0),
                       ),
                       elevation: 12.0,
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(recipientImageUrl!),
-                        radius: 22,
+                      child: CachedNetworkImage(
+                        imageUrl: participant.pickedUserImgUrl!,
+                        placeholder: (ctx, url) => CircleAvatar(
+                          radius: 22,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          radius: 22,
+                          backgroundColor: Colors.white,
+                          backgroundImage: imageProvider,
+                        ),
+                        errorWidget: (ctx, url, error) => CircleAvatar(
+                          radius: 22,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ),
                     ),
                 ],

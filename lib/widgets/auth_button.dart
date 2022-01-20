@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../my_packages/my_packages.dart';
 
 class AuthButton extends StatefulWidget {
   final isLoading;
@@ -36,15 +35,15 @@ class _AuthButtonState extends State<AuthButton> {
       },
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-            widget.btnColor.withOpacity(0.90),
+          backgroundColor: MaterialStateProperty.resolveWith(
+            (states) => widget.btnColor.withOpacity(0.9),
           ),
-          elevation: MaterialStateProperty.all(12.0),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(60.0),
             ),
           ),
+          elevation: MaterialStateProperty.all(12.0),
         ),
         child: Stack(
           fit: StackFit.expand,
@@ -54,11 +53,15 @@ class _AuthButtonState extends State<AuthButton> {
               alignment: Alignment.center,
               child: FittedBox(
                 child: (_startSpinner && widget.isLoading)
-                    ? CircularProgressIndicator(color: Colors.white)
+                    ? CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 2.0,
+                      )
                     : Text(
                         widget.btnText,
                         style: TextStyle(
                           fontSize: 18.0,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -75,7 +78,7 @@ class _AuthButtonState extends State<AuthButton> {
               ),
           ],
         ),
-        onPressed: widget.onTap,
+        onPressed: _startSpinner ? null : widget.onTap,
       ),
     );
   }

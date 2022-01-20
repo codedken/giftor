@@ -1,38 +1,46 @@
-import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:giftor/models/group/group.dart';
+import 'package:giftor/providers/auth_provider.dart';
 
 import '../my_packages/my_packages.dart';
+import '../screens/participants_screen.dart';
+import '../screens/pick_recipient_screen.dart';
 
-class GroupCard extends StatefulWidget {
-  final String groupName;
-  final String createdByText;
-  final String statusText;
-  final VoidCallback onTap;
+class GroupCard extends StatelessWidget {
+  final Group group;
 
   GroupCard({
-    required this.groupName,
-    required this.createdByText,
-    required this.statusText,
-    required this.onTap,
+    required this.group,
   });
 
   @override
-  State<GroupCard> createState() => _GroupCardState();
-}
-
-class _GroupCardState extends State<GroupCard> {
-  @override
   Widget build(BuildContext context) {
-    return BouncingWidget(
-      onPressed: widget.onTap,
-      scaleFactor: 1.0,
-      child: Card(
-        color: Colors.white,
-        elevation: 12.0,
-        margin: const EdgeInsets.only(bottom: 8.0),
-        shadowColor: Colors.grey,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
+    final authProvider = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    );
+    return Card(
+      color: Colors.white,
+      elevation: 12.0,
+      margin: const EdgeInsets.only(bottom: 8.0),
+      shadowColor: Colors.grey,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: InkWell(
+        onTap: () {
+          authProvider.isMe(group.creatorId)
+              ? Navigator.pushNamed(
+                  context,
+                  ParticipantsScreen.routeName,
+                  arguments: group,
+                )
+              : Navigator.pushNamed(
+                  context,
+                  PickRecipientScreen.routeName,
+                  arguments: group.id,
+                );
+        },
+        borderRadius: BorderRadius.circular(20.0),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -44,7 +52,7 @@ class _GroupCardState extends State<GroupCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      widget.groupName,
+                      group.title!,
                       style: TextStyle(
                         color: Color(0xff000000).withOpacity(0.75),
                         fontSize: 16.0,
@@ -53,7 +61,9 @@ class _GroupCardState extends State<GroupCard> {
                       ),
                     ),
                     Text(
-                      'Creator: ${widget.createdByText}',
+                      'Creator: ${authProvider.isMe(
+                        group.creatorId,
+                      ) ? 'Me' : group.creatorName}',
                       style: TextStyle(
                         color: Color(0xFF000000).withOpacity(0.58),
                         fontSize: 14.0,
@@ -62,7 +72,9 @@ class _GroupCardState extends State<GroupCard> {
                       ),
                     ),
                     Text(
-                      'Status: ${widget.statusText}',
+                      'Status: ${authProvider.isMe(
+                        group.creatorId,
+                      ) ? 'Owner' : 'Member'}',
                       style: TextStyle(
                         color: Color(0xff000000).withOpacity(0.58),
                         fontSize: 14.0,
