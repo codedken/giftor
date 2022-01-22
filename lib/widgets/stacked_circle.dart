@@ -31,31 +31,36 @@ class StackedCircle extends StatelessWidget {
             opacity: 0.30,
             child: Circle(color: Color(0xff4570AF), circleSize: 60.0),
           ),
-        ),Positioned(
+        ),
+        Positioned(
           top: 60.0,
           child: Opacity(
             opacity: 0.35,
             child: Circle(color: Color(0xff4570AF), circleSize: 50.0),
           ),
-        ),Positioned(
+        ),
+        Positioned(
           top: 80.0,
           child: Opacity(
             opacity: 0.50,
             child: Circle(color: Color(0xff4570AF), circleSize: 40.0),
           ),
-        ),Positioned(
+        ),
+        Positioned(
           top: 100.0,
           child: Opacity(
             opacity: 0.55,
             child: Circle(color: Color(0xff4570AF), circleSize: 30.0),
           ),
-        ),Positioned(
+        ),
+        Positioned(
           top: 120.0,
           child: Opacity(
             opacity: 0.60,
             child: Circle(color: Color(0xff4570AF), circleSize: 20.0),
           ),
-        ),Positioned(
+        ),
+        Positioned(
           top: 140.0,
           child: Opacity(
             opacity: 0.65,

@@ -56,7 +56,7 @@ class AuthBackground extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30.0),
+              SizedBox(height: 20.0),
               Expanded(
                 child: Stack(
                   children: [
@@ -82,6 +82,7 @@ class AuthBackground extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 8.0),
               Hero(
                 tag: 'auth-footer',
                 child: Row(
@@ -96,7 +97,6 @@ class AuthBackground extends StatelessWidget {
                       child: Container(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-
                           children: [
                             SizedBox(height: 8.0),
                             Material(

@@ -66,9 +66,10 @@ class _ParticipantsScreenState extends State<ParticipantsScreen> {
         appBar: null,
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
             child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Header(ctx: context, person: person),
                 SizedBox(height: 32.0),
@@ -117,8 +118,7 @@ class _ParticipantsScreenState extends State<ParticipantsScreen> {
                         onPressed: () async {
                           ScaffoldMessenger.of(context).clearSnackBars();
                           await FlutterClipboard.copy(widget.group.id!);
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
                               '✔️ Copied to Clipboard',
                               style: TextStyle(
@@ -174,8 +174,7 @@ class _ParticipantsScreenState extends State<ParticipantsScreen> {
                             style: TextStyle(
                               color: const Color(0xffffffff),
                               fontSize: 16,
-                              fontFamily:
-                                  GoogleFonts.kodchasan().fontFamily,
+                              fontFamily: GoogleFonts.kodchasan().fontFamily,
                             ),
                           );
                         }
@@ -190,7 +189,7 @@ class _ParticipantsScreenState extends State<ParticipantsScreen> {
                     ),
                   ),
                 ),
-
+                SizedBox(height: 8.0),
                 FooterCircles(),
               ],
             ),

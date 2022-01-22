@@ -194,10 +194,9 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                                   child: Column(
                                     children: <Widget>[
                                       Container(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                            0.75,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.75,
                                         child: Text(
                                           'Randomly select who you want to gift an item to',
                                           textAlign: TextAlign.center,
@@ -223,8 +222,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                                                   '$selectedIndex',
                                                   style: TextStyle(
                                                     fontSize: 30.0,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     color: Colors.black38,
                                                   ),
                                                 ),
@@ -261,8 +259,8 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                                       ),
                                       SizedBox(height: 4.0),
                                       FewerStackedCircle(
-                                        pointColor: Color(0xffffffff)
-                                            .withOpacity(0.8),
+                                        pointColor:
+                                            Color(0xffffffff).withOpacity(0.8),
                                       ),
                                       SizedBox(height: 44.0),
                                       if (selectedId != null &&
@@ -278,6 +276,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                         ),
                 ),
               ),
+              SizedBox(height: 8.0),
               FooterCircles(),
             ],
           ),

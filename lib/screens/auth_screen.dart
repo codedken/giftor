@@ -47,8 +47,8 @@ class AuthScreen extends StatelessWidget {
             ),
             Positioned(
               bottom: 16.0,
-              right: 12,
-              left: 12,
+              right: 12.0,
+              left: 12.0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -100,7 +100,7 @@ class _ResetPasswordCardState extends State<ResetPasswordCard> {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
+                  fontSize: 18.0,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -152,6 +152,7 @@ class _ResetPasswordCardState extends State<ResetPasswordCard> {
                         color: Colors.white,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                     onPressed: () => Navigator.pushNamed(
@@ -166,6 +167,7 @@ class _ResetPasswordCardState extends State<ResetPasswordCard> {
                         color: Colors.white,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                     onPressed: () => Navigator.pushNamed(
