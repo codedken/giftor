@@ -27,7 +27,6 @@ class MySharedPreferences {
 
   static Future<void> clearPrefs() async {
     await _prefs!.clear();
-    await _prefs!.reload();
   }
 
   static bool exists(String keyTitle) => _prefs!.containsKey(keyTitle);

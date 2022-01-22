@@ -14,24 +14,16 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff0A0616),
+      backgroundColor: kScaffoldColor,
       body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(
-                top: 100.0,
-              ),
-              decoration: BoxDecoration(
-                color: Color(0xff0A0616),
-              ),
-            ),
-            Positioned(
-              top: 16.0,
-              right: 12.0,
-              left: 12.0,
-              child: Row(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12.0,
+            vertical: 16.0,
+          ),
+          child: Column(
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RoundedCircleGroup(
@@ -44,75 +36,37 @@ class AuthScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Positioned(
-              bottom: 16.0,
-              right: 12.0,
-              left: 12.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RoundedCircleGroup(
-                    primaryColor: Color(0xffAF455F),
-                    pointColor: Color(0xffffffff),
-                  ),
-                  RoundedCircleGroup(
-                    primaryColor: Color(0xff4563AF),
-                    pointColor: Color(0xffffffff),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 40.0,
-              child: StackedCircle(
-                pointColor: Color(0xffAF455F),
-              ),
-            ),
-            Positioned(
-              bottom: 350.0,
-              child: StackedCircle(
-                pointColor: Color(0xff4563AF),
-              ),
-            ),
-            Positioned(
-              top: 200.0,
-              child: Container(
-                width: getAuthContainerWidth(context),
-                margin: const EdgeInsets.only(
-                  left: 24.0,
-                  right: 24.0,
-                ),
+              Expanded(
                 child: Column(
                   children: [
+                    StackedCircle(
+                      pointColor: Color(0xffAF455F),
+                    ),
+                    SizedBox(height: 60.0),
                     Text(
                       kAppName,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 60,
+                        fontSize: 50,
                         fontFamily: GoogleFonts.lobster().fontFamily,
                       ),
                     ),
                     SizedBox(height: 8.0),
-                    Text(
-                      'Spread love by exchanging gifts with one another',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        'Spread love by exchanging gifts with one another',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 120.0,
-              child: Container(
-                width: getAuthContainerWidth(context),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+                    StackedCircle(
+                      pointColor: Color(0xff4563AF),
+                    ),
+                    Spacer(),
                     AuthButton(
                       btnColor: Color(0xff1323B4),
                       btnText: 'SIGN IN',
@@ -130,11 +84,25 @@ class AuthScreen extends StatelessWidget {
                         RegisterScreen.routeName,
                       ),
                     ),
+                    SizedBox(height: 12.0),
                   ],
                 ),
               ),
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RoundedCircleGroup(
+                    primaryColor: Color(0xffAF455F),
+                    pointColor: Color(0xffffffff),
+                  ),
+                  RoundedCircleGroup(
+                    primaryColor: Color(0xff4563AF),
+                    pointColor: Color(0xffffffff),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
