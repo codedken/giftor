@@ -28,6 +28,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
   int selectedIndex = 0;
   bool onPressed = false;
   bool _isLoading = true;
+  bool _startSelection = false;
   String? _groupName = '';
   String? userId = null;
   var person;
@@ -62,6 +63,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
     }
     getGroupProvider.getGroup(widget.groupId).then((value) => setState(() {
           _groupName = value.title;
+          _startSelection = value.startSelection;
           _isLoading = false;
         }));
     super.initState();
@@ -253,9 +255,11 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                                                 : Colors.white,
                                           ),
                                         ),
-                                        onPressed: selectedId != null
+                                        onPressed: (selectedId != null)
                                             ? null
-                                            : shuffleUsers,
+                                            : _startSelection == false
+                                                ? null
+                                                : shuffleUsers,
                                       ),
                                       SizedBox(height: 4.0),
                                       FewerStackedCircle(

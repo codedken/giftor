@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import './widgets.dart';
 import '../constants_and_methods.dart';
 
@@ -112,7 +113,7 @@ class AuthBackground extends StatelessWidget {
                             Material(
                               color: Colors.transparent,
                               child: Text(
-                                'Copyright @ 2021',
+                                'Copyright @ ${DateFormat.y().format(DateTime.now())}',
                                 style: kAuthFooterTextStyle,
                                 textAlign: TextAlign.center,
                                 maxLines: 2,

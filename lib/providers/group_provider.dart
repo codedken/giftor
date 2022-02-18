@@ -13,6 +13,9 @@ class GroupProvider with ChangeNotifier {
   String _usersCollection = 'users';
   String _groups = 'groups';
   String _members = 'members';
+  String allowSelectionText = '';
+  Color allowSelectionColor = const Color(0xff1323B4).withOpacity(0.8);
+  bool selectionStarted = false;
   AuthProvider? _authProvider;
   final _userData = MySharedPreferences.userData;
   List<Group> _allGroupsList = [];
@@ -59,6 +62,7 @@ class GroupProvider with ChangeNotifier {
             id: selectedGroup.get('id'),
             title: selectedGroup.get('title'),
             creatorId: selectedGroup.get('creatorId'),
+            startSelection: selectedGroup.get('startSelection'),
             creatorName: name,
             createdAt: DateTime.parse(selectedGroup.get('createdAt')),
             purpose: selectedGroup.get('purpose'),
@@ -93,6 +97,7 @@ class GroupProvider with ChangeNotifier {
       id: group.get('id'),
       creatorId: group.get('creatorId'),
       title: group.get('title'),
+      startSelection: group.get('startSelection'),
       creatorName: group.get('creatorName'),
       purpose: group.get('purpose'),
       createdAt: DateTime.parse(group.get('createdAt')),
@@ -337,5 +342,33 @@ class GroupProvider with ChangeNotifier {
       filteredParticipants = allParticipants;
     }
     notifyListeners();
+  }
+
+  Future<void> allowSelection(String groupId) async {
+    final groupDoc = await _db.collection(_groups).doc(groupId).get();
+    bool startSelect = groupDoc.get('startSelection');
+    if (startSelect == false) {
+      await _db.collection(_groups).doc(groupId).update({
+        'startSelection': true,
+      });
+      allowSelectionText = 'Selection allowed';
+    }
+    selectionStarted = groupDoc.get('startSelection');
+    if (selectionStarted) {
+      allowSelectionColor = const Color(0xff1323B4).withOpacity(0.3);
+    }
+    notifyListeners();
+  }
+
+  Future<void> setSelectionStarted(String groupId) async {
+    final groupDoc = await _db.collection(_groups).doc(groupId).get();
+    selectionStarted = groupDoc.get('startSelection');
+    if (selectionStarted) {
+      allowSelectionColor = const Color(0xff1323B4).withOpacity(0.3);
+      allowSelectionText = 'Selection allowed';
+    } else {
+      allowSelectionColor = const Color(0xff1323B4).withOpacity(0.8);
+      allowSelectionText = 'Allow Selection';
+    }
   }
 }

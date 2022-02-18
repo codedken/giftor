@@ -64,10 +64,9 @@ class PickAndDeleteBtn extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: Row(
-
           children: <Widget>[
             HomeButton(
-              btnColor: Color(0xff1323B4).withOpacity(0.9),
+              btnColor: const Color(0xff1323B4).withOpacity(0.9),
               btnText: 'Pick giftee',
               onTap: () {
                 Navigator.pushNamed(

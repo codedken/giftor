@@ -16,6 +16,7 @@ class Group with _$Group {
     @required String? creatorId,
     @required String? creatorName,
     @required DateTime? createdAt,
+    @Default(false) bool startSelection,
   }) = _Group;
 
   factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
