@@ -28,6 +28,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
   int selectedIndex = 0;
   bool onPressed = false;
   bool _isLoading = true;
+  bool _startSelection = false;
   String? _groupName = '';
   String? userId = null;
   var person;
@@ -62,6 +63,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
     }
     getGroupProvider.getGroup(widget.groupId).then((value) => setState(() {
           _groupName = value.title;
+          _startSelection = value.startSelection;
           _isLoading = false;
         }));
     super.initState();
@@ -194,10 +196,9 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                                   child: Column(
                                     children: <Widget>[
                                       Container(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                            0.75,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.75,
                                         child: Text(
                                           'Randomly select who you want to gift an item to',
                                           textAlign: TextAlign.center,
@@ -223,8 +224,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                                                   '$selectedIndex',
                                                   style: TextStyle(
                                                     fontSize: 30.0,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     color: Colors.black38,
                                                   ),
                                                 ),
@@ -255,14 +255,16 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                                                 : Colors.white,
                                           ),
                                         ),
-                                        onPressed: selectedId != null
+                                        onPressed: (selectedId != null)
                                             ? null
-                                            : shuffleUsers,
+                                            : _startSelection == false
+                                                ? null
+                                                : shuffleUsers,
                                       ),
                                       SizedBox(height: 4.0),
                                       FewerStackedCircle(
-                                        pointColor: Color(0xffffffff)
-                                            .withOpacity(0.8),
+                                        pointColor:
+                                            Color(0xffffffff).withOpacity(0.8),
                                       ),
                                       SizedBox(height: 44.0),
                                       if (selectedId != null &&
@@ -278,6 +280,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
                         ),
                 ),
               ),
+              SizedBox(height: 8.0),
               FooterCircles(),
             ],
           ),

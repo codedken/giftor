@@ -67,6 +67,8 @@ class Giftor extends StatelessWidget {
               return pageTransitionWidget(RegisterScreen());
             case ResetPasswordScreen.routeName:
               return pageTransitionWidget(ResetPasswordScreen());
+            default:
+              return pageTransitionWidget(AuthScreen());
           }
         },
       ),

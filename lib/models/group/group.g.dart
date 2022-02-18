@@ -15,6 +15,7 @@ _$_Group _$$_GroupFromJson(Map<String, dynamic> json) => _$_Group(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
+      startSelection: json['startSelection'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_GroupToJson(_$_Group instance) => <String, dynamic>{
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$_GroupToJson(_$_Group instance) => <String, dynamic>{
       'creatorId': instance.creatorId,
       'creatorName': instance.creatorName,
       'createdAt': instance.createdAt?.toIso8601String(),
+      'startSelection': instance.startSelection,
     };

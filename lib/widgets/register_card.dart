@@ -396,6 +396,7 @@ class _RegisterCardState extends State<RegisterCard> {
                         color: Colors.white,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                     onPressed: () => Navigator.pushNamed(
@@ -410,6 +411,7 @@ class _RegisterCardState extends State<RegisterCard> {
                         color: Colors.white,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
                     onPressed: () => Navigator.pushNamed(

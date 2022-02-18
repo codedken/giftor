@@ -18,9 +18,10 @@ Color kTextColorWithOpacity = const Color(0xff000000).withOpacity(0.2);
 
 //full screen
 void get kShowBottomStatusBar async {
-  await SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
-    overlays: [],
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: const Color(0xff0A0616),
+    ),
   );
 }
 
@@ -92,8 +93,8 @@ PageTransition pageTransitionWidget(Widget widget) {
   return PageTransition(
     child: widget,
     type: PageTransitionType.rightToLeftWithFade,
-    duration: const Duration(milliseconds: 900),
-    reverseDuration: const Duration(milliseconds: 900),
+    duration: const Duration(milliseconds: 700),
+    reverseDuration: const Duration(milliseconds: 700),
     curve: Curves.fastOutSlowIn,
   );
 }

@@ -17,28 +17,28 @@ class RoundedCircleGroup extends StatelessWidget {
           opacity: 0.30,
           child: Circle(
             color: primaryColor,
-            circleSize: 80.0,
+            circleSize: 70.0,
           ),
         ),
         Opacity(
           opacity: 0.40,
           child: Circle(
             color: primaryColor,
-            circleSize: 60.0,
+            circleSize: 50.0,
           ),
         ),
         Opacity(
           opacity: 0.50,
           child: Circle(
             color: primaryColor,
-            circleSize: 40.0,
+            circleSize: 30.0,
           ),
         ),
         Opacity(
           opacity: 0.60,
           child: Circle(
             color: pointColor,
-            circleSize: 10.0,
+            circleSize: 5.0,
           ),
         ),
       ],

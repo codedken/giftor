@@ -27,7 +27,8 @@ class _$GroupTearOff {
       String? purpose,
       String? creatorId,
       String? creatorName,
-      DateTime? createdAt}) {
+      DateTime? createdAt,
+      bool startSelection = false}) {
     return _Group(
       id: id,
       title: title,
@@ -35,6 +36,7 @@ class _$GroupTearOff {
       creatorId: creatorId,
       creatorName: creatorName,
       createdAt: createdAt,
+      startSelection: startSelection,
     );
   }
 
@@ -54,6 +56,7 @@ mixin _$Group {
   String? get creatorId => throw _privateConstructorUsedError;
   String? get creatorName => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  bool get startSelection => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -70,7 +73,8 @@ abstract class $GroupCopyWith<$Res> {
       String? purpose,
       String? creatorId,
       String? creatorName,
-      DateTime? createdAt});
+      DateTime? createdAt,
+      bool startSelection});
 }
 
 /// @nodoc
@@ -89,6 +93,7 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
     Object? creatorId = freezed,
     Object? creatorName = freezed,
     Object? createdAt = freezed,
+    Object? startSelection = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -115,6 +120,10 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      startSelection: startSelection == freezed
+          ? _value.startSelection
+          : startSelection // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -130,7 +139,8 @@ abstract class _$GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
       String? purpose,
       String? creatorId,
       String? creatorName,
-      DateTime? createdAt});
+      DateTime? createdAt,
+      bool startSelection});
 }
 
 /// @nodoc
@@ -150,6 +160,7 @@ class __$GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
     Object? creatorId = freezed,
     Object? creatorName = freezed,
     Object? createdAt = freezed,
+    Object? startSelection = freezed,
   }) {
     return _then(_Group(
       id: id == freezed
@@ -176,6 +187,10 @@ class __$GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      startSelection: startSelection == freezed
+          ? _value.startSelection
+          : startSelection // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -189,7 +204,8 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
       this.purpose,
       this.creatorId,
       this.creatorName,
-      this.createdAt})
+      this.createdAt,
+      this.startSelection = false})
       : super._();
 
   factory _$_Group.fromJson(Map<String, dynamic> json) =>
@@ -207,10 +223,13 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
   final String? creatorName;
   @override
   final DateTime? createdAt;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool startSelection;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Group(id: $id, title: $title, purpose: $purpose, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt)';
+    return 'Group(id: $id, title: $title, purpose: $purpose, creatorId: $creatorId, creatorName: $creatorName, createdAt: $createdAt, startSelection: $startSelection)';
   }
 
   @override
@@ -223,7 +242,8 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('purpose', purpose))
       ..add(DiagnosticsProperty('creatorId', creatorId))
       ..add(DiagnosticsProperty('creatorName', creatorName))
-      ..add(DiagnosticsProperty('createdAt', createdAt));
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('startSelection', startSelection));
   }
 
   @override
@@ -245,7 +265,10 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
                     .equals(other.creatorName, creatorName)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
-                    .equals(other.createdAt, createdAt)));
+                    .equals(other.createdAt, createdAt)) &&
+            (identical(other.startSelection, startSelection) ||
+                const DeepCollectionEquality()
+                    .equals(other.startSelection, startSelection)));
   }
 
   @override
@@ -256,7 +279,8 @@ class _$_Group extends _Group with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(purpose) ^
       const DeepCollectionEquality().hash(creatorId) ^
       const DeepCollectionEquality().hash(creatorName) ^
-      const DeepCollectionEquality().hash(createdAt);
+      const DeepCollectionEquality().hash(createdAt) ^
+      const DeepCollectionEquality().hash(startSelection);
 
   @JsonKey(ignore: true)
   @override
@@ -276,7 +300,8 @@ abstract class _Group extends Group {
       String? purpose,
       String? creatorId,
       String? creatorName,
-      DateTime? createdAt}) = _$_Group;
+      DateTime? createdAt,
+      bool startSelection}) = _$_Group;
   _Group._() : super._();
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;
@@ -293,6 +318,8 @@ abstract class _Group extends Group {
   String? get creatorName => throw _privateConstructorUsedError;
   @override
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @override
+  bool get startSelection => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$GroupCopyWith<_Group> get copyWith => throw _privateConstructorUsedError;

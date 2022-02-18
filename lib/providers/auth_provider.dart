@@ -254,6 +254,7 @@ class AuthProvider with ChangeNotifier {
     _batchWrite.delete(userDoc.reference);
     await _batchWrite.commit();
     await _auth.currentUser!.delete();
+    await MySharedPreferences.clearPrefs();
   }
 
   Future<void> confirmUser(String email, String password) async {
