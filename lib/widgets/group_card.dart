@@ -19,6 +19,7 @@ class GroupCard extends StatelessWidget {
       listen: false,
     );
     return Card(
+      key: ValueKey<Group>(group),
       color: Colors.white,
       elevation: 12.0,
       margin: const EdgeInsets.only(bottom: 8.0),

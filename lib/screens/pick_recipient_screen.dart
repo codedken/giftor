@@ -24,6 +24,7 @@ class PickRecipientScreen extends StatefulWidget {
 class _PickRecipientScreenState extends State<PickRecipientScreen> {
   var users = [];
   var sub;
+  var sub2;
   var selectedId = null;
   int selectedIndex = 0;
   bool onPressed = false;
@@ -43,11 +44,8 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
         userId = person.id;
       }
     }
-    sub = FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .snapshots()
-        .listen((doc) async {
+    final _db = FirebaseFirestore.instance;
+    sub = _db.collection('users').doc(userId).snapshots().listen((doc) async {
       final isGroupExist = await Provider.of<GroupProvider>(
         context,
         listen: false,
@@ -55,6 +53,14 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
 
       if (isGroupExist == false) {
         Navigator.of(context).pop();
+      }
+    });
+    String id = widget.groupId;
+    sub2 = _db.collection('groups').doc(id).snapshots().listen((doc) {
+      final startSelection = doc.get('startSelection');
+      if (startSelection == true) {
+        setState(() => _startSelection = true);
+        sub2.cancel();
       }
     });
     setSelectedId();
@@ -72,6 +78,7 @@ class _PickRecipientScreenState extends State<PickRecipientScreen> {
   @override
   void dispose() {
     sub.cancel();
+    sub2.cancel();
     super.dispose();
   }
 
